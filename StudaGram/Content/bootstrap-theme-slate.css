@@ -17,7 +17,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  position:absolute;
+  position:relative;
   width:100%;
   top:150px;
   margin: 0;
@@ -97,11 +97,22 @@ img {
   border: 0;
 }
 
-div#logotest{
-    position: relative;
-    margin: 0 auto;
-    top: 70px;
-    left: 250px;
+/*img#logo1{
+    position:relative;
+    
+    height: 250px;
+    
+    left:30%;
+}*/
+.logotest{
+    height: 50px;
+    width: 50px;
+    /* background: #F00; */
+    position: absolute;
+    /* top: 0; */
+    bottom: 113%;
+    right: 50%;
+    margin-right: 600px;
 }
 svg:not(:root) {
   overflow: hidden;
@@ -1095,6 +1106,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
+  position:relative;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
@@ -6808,7 +6820,8 @@ button.close {
   }
 }
 .navbar {
-  position:absolute;
+  position:relative;
+  margin-left: -1px;
   background-image: -webkit-linear-gradient(#484e55, #3a3f44 60%, #313539);
   background-image: -o-linear-gradient(#484e55, #3a3f44 60%, #313539);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#484e55), color-stop(60%, #3a3f44), to(#313539));
