@@ -17,6 +17,9 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
+  position:absolute;
+  width:100%;
+  top:150px;
   margin: 0;
 }
 article,
@@ -92,6 +95,12 @@ sub {
 }
 img {
   border: 0;
+}
+img#logoHeader {
+    vertical-align: middle;
+    position: absolute;
+    top: -150px;
+    left: 250px;
 }
 svg:not(:root) {
   overflow: hidden;
@@ -6798,6 +6807,7 @@ button.close {
   }
 }
 .navbar {
+  position:absolute;
   background-image: -webkit-linear-gradient(#484e55, #3a3f44 60%, #313539);
   background-image: -o-linear-gradient(#484e55, #3a3f44 60%, #313539);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#484e55), color-stop(60%, #3a3f44), to(#313539));
@@ -6827,8 +6837,9 @@ button.close {
 .navbar-nav > li > a {
   border-right: 1px solid rgba(0, 0, 0, 0.2);
   border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom-right-radius: 10px;
-    border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  text-decoration-color:black;
 
 }
 .navbar-nav > li > a:hover {
