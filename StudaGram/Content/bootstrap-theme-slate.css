@@ -97,6 +97,9 @@ img {
   border: 0;
 }
 
+div#imgInfo {
+    display: inline;
+}
 /*img#logo1{
     position:relative;
     
