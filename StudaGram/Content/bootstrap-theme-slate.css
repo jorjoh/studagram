@@ -114,6 +114,9 @@ img {
     right: 50%;
     margin-right: 600px;
 }
+p#copyRight {
+    text-align: center;
+}
 svg:not(:root) {
   overflow: hidden;
 }
