@@ -109,8 +109,8 @@ img {
     width: 50px;
     /* background: #F00; */
     position: absolute;
-    /* top: 0; */
-    bottom: 113%;
+    top: -150px;
+    /*bottom: 113%;*/
     right: 50%;
     margin-right: 600px;
 }
@@ -4665,6 +4665,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse {
   background-color: #7a8288;
   border-color: #62686d;
+  background: -webkit-linear-gradient(top, #777777 0%, #888888 100%);
 }
 .navbar-inverse .navbar-brand {
   color: #cccccc;
