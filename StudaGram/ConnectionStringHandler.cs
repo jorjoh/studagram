@@ -13,17 +13,19 @@ namespace StudaGram
         public void retrieveConnectionStrings()
         {
             SqlConnectionString = System.Environment.GetEnvironmentVariable("SQLAZURECONNSTR");
-            if(SqlConnectionString == null)
+            if(SqlConnectionString == null) //Default to development environment if conn string is not found
             {
-                SqlConnectionString = "UseDevelopmentStorage";
+                SqlConnectionString = "UseDevelopmentStorage=true";
             }
 
             AzureStorageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
-            if(AzureStorageConnectionString == null)
+            if(AzureStorageConnectionString == null) //Default to development environment if conn string is not found
             {
-                AzureStorageConnectionString = "UseDevelopmentStorage";
+                AzureStorageConnectionString = "UseDevelopmentStorage=true";
             }
+            
             //TODO: Write connection strings to appropriate elements in the config file
+
         }
     }
 }
