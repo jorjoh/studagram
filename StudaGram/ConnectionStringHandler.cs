@@ -23,6 +23,7 @@ namespace StudaGram
             {
                 AzureStorageConnectionString = "UseDevelopmentStorage";
             }
+            //TODO: Write connection strings to appropriate elements in the config file
         }
     }
 }
