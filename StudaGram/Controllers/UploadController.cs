@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,33 +15,32 @@ namespace StudaGram.Controllers
         // GET: Upload
         public ActionResult Index()
         {
-            CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer();
-            List<string> blobs = new List<string>();
-            foreach (var blobItem in blobContainer.ListBlobs())
-            {
-                blobs.Add(blobItem.Uri.ToString());
-            }
-
-            return View(blobs);
+            return View();
         }
 
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase Image)
         {
-            try
+            CloudBlobContainer container = _blobStorageService.GetCloudBlobContainer();
+            string path = @"C:\Temp";
+
+            var image = Request.Files["image"];
+            if (image == null)
             {
-                if (Image.ContentLength > 0)
-                {
-                    CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer();
-                    CloudBlockBlob blob = blobContainer.GetBlockBlobReference(Image.FileName);
-                    blob.UploadFromStream(Image.InputStream);
-                }
+                ViewBag.UploadMessage = "Failed to upload image";
             }
-            catch (NullReferenceException ex)
+            else
             {
-                Console.WriteLine("Processor Usage" + ex.Message);
+                ViewBag.UploadMessage = String.Format("Got image {0} of type {1} and size {2}", image.FileName,
+                    image.ContentType, image.ContentLength);
+
+                string uniqueBlobName = string.Format("image_{0}-{1}", Guid.NewGuid().ToString(),
+                    Path.GetExtension(image.FileName));
+                CloudBlockBlob blob = container.GetBlockBlobReference(uniqueBlobName);
+                blob.Properties.ContentType = image.ContentType;
+                blob.UploadFromStream(image.InputStream);
             }
-            return RedirectToAction("Index");
+            return View();
         }
     }
 }

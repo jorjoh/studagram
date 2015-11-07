@@ -1,28 +1,24 @@
-﻿using Microsoft.WindowsAzure.Storage;
+﻿using System.Configuration;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace StudaGram.Controllers
 {
     internal class BlobStorageServices
     {
-        private string AzureStorageConnectionString = System.Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
         public CloudBlobContainer GetCloudBlobContainer()
         {
-            if (AzureStorageConnectionString == null)
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobStorage.GetContainerReference("images");
+            if (container.CreateIfNotExists())
             {
-                AzureStorageConnectionString = "UseDevelopmentStorage=true;";
+                var permissions = container.GetPermissions();
+                permissions.PublicAccess = BlobContainerPublicAccessType.Container;
+                container.SetPermissions(permissions);
             }
 
-            CloudStorageAccount storageAccount =
-                CloudStorageAccount.Parse(AzureStorageConnectionString);
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer blobContainer = blobClient.GetContainerReference("images");
-            if (blobContainer.CreateIfNotExists())
-            {
-                blobContainer.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
-            }
-
-            return blobContainer;
+            return container;
         }
     }
 }
