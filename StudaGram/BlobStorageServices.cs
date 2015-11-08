@@ -8,7 +8,8 @@ namespace StudaGram.Controllers
     {
         public CloudBlobContainer GetCloudBlobContainer()
         {
-            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            ConnectionStringHandler csh = new ConnectionStringHandler();
+            var storageAccount = CloudStorageAccount.Parse(/*ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString*/csh.GetAzureSqlConnectionString());
             CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobStorage.GetContainerReference("images");
             if (container.CreateIfNotExists())
