@@ -7,25 +7,15 @@ namespace StudaGram
 {
     public class ConnectionStringHandler
     {   
-        public string GetAzureSqlConnectionString()
+        public string GetAzureSqlConnectionString() //Gets connstring for Azure SQL if set as an environment variable. If it is not, default to development storage
         {
-            string AzureSqlConnectionString = System.Environment.GetEnvironmentVariable("SQLAZURECONNSTR");
-            if (AzureSqlConnectionString == null) //Default to development storage if the environment variables are not found
-            {
-                return "UseDevelopmentStorage=true";
-            }
-
-            return AzureSqlConnectionString;
+            string AzureSqlConnectionString = System.Environment.GetEnvironmentVariable("SQLAZURECONNSTR") ?? "UseDevelopmentStorage=true";
+            return AzureSqlConnectionString;           
         }
 
-        public string GetAzureStorageConnectionString()
+        public string GetAzureStorageConnectionString() //Gets connstring for Azure Storage if set as an environment variable. If it is not, default to development storage
         {
-            string AzureStorageConnectionString = System.Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
-            if (AzureStorageConnectionString == null) //Default to development storage if the environment variables are not found
-            {
-                return "UseDevelopmentStorage=true";
-            }
-
+            string AzureStorageConnectionString = System.Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING") ?? "UseDevelopmentStorage=true";
             return AzureStorageConnectionString;
         }
     }
