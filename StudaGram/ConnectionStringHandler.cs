@@ -9,7 +9,7 @@ namespace StudaGram
     {   
         public string GetAzureSqlConnectionString() //Gets connstring for Azure SQL if set as an environment variable. If it is not, default to development storage
         {
-            string AzureSqlConnectionString = System.Environment.GetEnvironmentVariable("SQLAZURECONNSTR") ?? "UseDevelopmentStorage=true";
+            string AzureSqlConnectionString = System.Environment.GetEnvironmentVariable("SQLAZURECONNSTR") ?? "DefaultConnection";
             return AzureSqlConnectionString;           
         }
 
