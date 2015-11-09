@@ -27,7 +27,7 @@ namespace StudaGram.Models
         private static ConnectionStringHandler csh = new ConnectionStringHandler();
         
         public ApplicationDbContext()
-            : base(csh.GetAzureSqlConnectionString(), throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
