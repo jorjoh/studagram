@@ -26,5 +26,12 @@ namespace StudaGram.Controllers
 
             return View();
         }
+
+        public ActionResult AccessDenied()
+        {
+            ViewBag.Message = "Access Denied";
+
+            return View();
+        }
     }
 }

@@ -311,6 +311,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Upload\Index.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.WindowsAzure.Storage.Blob;
+using StudaGram.Models;
 
 namespace StudaGram.Controllers
 {
@@ -15,6 +16,10 @@ namespace StudaGram.Controllers
         // GET: Upload
         public ActionResult Index()
         {
+            if (!Request.IsAuthenticated)
+            {
+                Response.Redirect("~/Home/AccessDenied");
+            }
             return View();
         }
 

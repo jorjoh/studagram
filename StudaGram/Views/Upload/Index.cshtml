@@ -3,8 +3,6 @@
     ViewBag.Title = "Index";
 }
 
-@if (Request.IsAuthenticated)
-{
     <h2>Upload image</h2>
     <form method="post" action="" enctype="multipart/form-data">
         <div id="imgInfo">
@@ -16,11 +14,5 @@
         <input class="btn btn-primary btn-lg" type="file" name="image"/>
         <input class="btn btn-primary btn-lg" type="submit"/>
     </form>
-}
-else
-{
-    <h1>Access denied</h1>
-    <p>You have to be <a href="#">signed in</a> to use this function!</p>
-}
 
 
