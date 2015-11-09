@@ -27,12 +27,12 @@ namespace StudaGram.Controllers
             var image = Request.Files["image"];
             if (image == null)
             {
-                ViewBag.UploadMessage = "Failed to upload image";
+                Response.Write("Failed to upload image");
             }
             else
             {
-                ViewBag.UploadMessage = String.Format("Got image {0} of type {1} and size {2}", image.FileName,
-                    image.ContentType, image.ContentLength);
+                Response.Write(String.Format("Got image {0} of type {1} and size {2}", image.FileName,
+                    image.ContentType, image.ContentLength));
 
                 string uniqueBlobName = string.Format("image_{0}-{1}", Guid.NewGuid().ToString(),
                     Path.GetExtension(image.FileName));
