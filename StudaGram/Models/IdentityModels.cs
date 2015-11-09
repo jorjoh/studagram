@@ -24,8 +24,10 @@ namespace StudaGram.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        private static ConnectionStringHandler csh = new ConnectionStringHandler();
+        
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base(csh.GetAzureSqlConnectionString(), throwIfV1Schema: false)
         {
         }
 
