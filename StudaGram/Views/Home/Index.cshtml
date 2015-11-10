@@ -3,6 +3,14 @@
     ViewBag.Title = "Home Page";
 }
 
+<script>
+    function incrementLike(id) {
+        $.post("/api/like/" + id).then(function (result) {
+            $("#likeCount" + id).html(result.data.Likes);
+        });
+    }
+</script>
+
 <div class="jumbotron">
     <h1>Velkommen til InstaStudentGram</h1>
   
@@ -23,12 +31,13 @@
                 <img src="@Model.Images[i].Url" alt="@Model.Images[i].Title">
                 <div class="carousel-caption">
                    <p>@Model.Images[i].Description</p>
-                   <p>@Model.Images[i].Uploaded.ToString()</p>
+                   <p>@Model.Images[i].Uploaded.ToString("F")</p>
+                    <div id="likeCount@(Model.Images[i].RowKey)">@Model.Images[i].Likes</div>
+                    <a href="javascript:;" onclick="incrementLike('@Model.Images[i].RowKey');">Like</a>
                 </div>
             </div>
         }
-            
-            ...
+                      
         </div>
 
         <!-- Controls -->
