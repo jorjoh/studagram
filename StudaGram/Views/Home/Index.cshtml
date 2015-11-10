@@ -6,7 +6,7 @@
 <script>
     function incrementLike(id) {
         $.post("/api/like/" + id).then(function (result) {
-            $("#likeCount" + id).html(result.data.Likes);
+            $("#likeCount" + id).html(result.Likes);
         });
     }
 </script>
