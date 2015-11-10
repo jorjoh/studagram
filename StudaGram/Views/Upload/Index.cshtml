@@ -1,4 +1,4 @@
-﻿
+﻿@model StudaGram.Models.UploadModel
 @{
     ViewBag.Title = "Index";
 }
@@ -6,12 +6,11 @@
     <h2>Upload image</h2>
     <form method="post" action="" enctype="multipart/form-data">
         <div id="imgInfo">
-            <input class="form-control" name="imgTitle" type="text" id="imgTitle" placeholder="Title"/> <br/>
-            <input class="form-control" name="imgDescription" type="text" id="imgDescription" placeholder="Description"/> <br/>
-            <input class="form-control" name="imgOwner" type="text" id="imgOwner" placeholder="Owner"/> <br/>
+            @Html.TextBoxFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Description)          
         </div>
 
-        <input class="btn btn-primary btn-lg" type="file" name="image"/>
+        <input type="file" id="@Html.IdFor(m => m.UploadedFile)" name="@Html.NameFor(m => m.UploadedFile)"/>)
         <input class="btn btn-primary btn-lg" type="submit"/>
     </form>
 

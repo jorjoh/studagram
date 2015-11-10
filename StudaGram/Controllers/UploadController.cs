@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.WindowsAzure.Storage.Blob;
 using StudaGram.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace StudaGram.Controllers
 {
@@ -24,12 +26,12 @@ namespace StudaGram.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase Image)
+        public ActionResult Index(UploadModel Image)
         {
             CloudBlobContainer container = _blobStorageService.GetCloudBlobContainer();
             string path = @"C:\Temp";
 
-            var image = Request.Files["image"];
+            var image = Image.UploadedFile;
             if (image == null)
             {
                 Response.Write("Failed to upload image");
@@ -44,6 +46,20 @@ namespace StudaGram.Controllers
                 CloudBlockBlob blob = container.GetBlockBlobReference(uniqueBlobName);
                 blob.Properties.ContentType = image.ContentType;
                 blob.UploadFromStream(image.InputStream);
+
+                var result = UploadedImage.create();
+                result.Url = blob.Uri.ToString();
+                result.Title = Image.Title;
+                result.Description = Image.Description;
+                result.Uploaded = DateTime.Now;
+                result.Owner = User.Identity.GetUserId();
+                result.Likes = 0;
+
+                var tableClient = _blobStorageService.GetAzureTableAccount();
+                var table = _blobStorageService.GetTable(tableClient);
+                table.CreateIfNotExists();
+                var tableOperation = TableOperation.Insert(result);
+                table.Execute(tableOperation);       
             }
             return View();
         }

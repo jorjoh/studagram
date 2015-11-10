@@ -1,8 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace StudaGram.Models
 {
@@ -22,12 +24,30 @@ namespace StudaGram.Models
         }
     }
 
+    public class UploadedImage : TableEntity
+    {
+        public UploadedImage(){ }
+        private UploadedImage(string partitionKey, string rowKey) : base(partitionKey, rowKey) { }
+        
+        public static string Images = "Images";
+        public string Owner { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Url { get; set; }
+        public DateTime Uploaded { get; set; }
+        public int Likes { get; set; }
+
+        public static UploadedImage create() {
+            return new UploadedImage("Images", Guid.NewGuid().ToString());
+        }   
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         private static ConnectionStringHandler csh = new ConnectionStringHandler();
         
         public ApplicationDbContext()
-            : base(csh.GetAzureSqlConnectionString(), throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
