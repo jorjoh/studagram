@@ -40,7 +40,9 @@ namespace StudaGram.Controllers
 
         public CloudTable GetTable(CloudTableClient tableClient)
         {
-            return tableClient.GetTableReference("Images");
+            var table = tableClient.GetTableReference("Images");
+            table.CreateIfNotExists();
+            return table;
         }
     }
 }
