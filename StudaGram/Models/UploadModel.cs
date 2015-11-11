@@ -10,9 +10,13 @@ namespace StudaGram.Models
     {
 
         [Required]
+        [MinLength(2)]
+        [Display(Name = "Title")]
         public string Title { get; set; }
         [Required]
         public string Description { get; set; }
+
+   
         [DataType(DataType.Upload)]
         public HttpPostedFileBase UploadedFile { get; set; }
 

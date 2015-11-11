@@ -6880,6 +6880,7 @@ button.close {
   margin-left: 5px;
   margin-right: 5px;
 }
+
 .btn,
 .btn:hover {
   border-color: rgba(0, 0, 0, 0.6);
@@ -6894,6 +6895,7 @@ button.close {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff484e55', endColorstr='#ff313539', GradientType=0);
   -webkit-filter: none;
           filter: none;
+    margin-bottom: 1%;
 }
 .btn-default:hover {
   background-image: -webkit-linear-gradient(#020202, #101112 40%, #191b1d);
